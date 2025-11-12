@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Sahib Jewellers</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">💎 Sahib Jewellers</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search jewelry...">
+                    </div>
+                </li>
+                <li>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Checkout Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Checkout</h2>
+            
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;">
+                <!-- Checkout Form -->
+                <div>
+                    <form id="checkoutForm" onsubmit="handleCheckout(event)">
+                        <h3 style="margin-bottom: 1.5rem;">Shipping Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="checkoutName">Full Name *</label>
+                            <input type="text" id="checkoutName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkoutEmail">Email *</label>
+                            <input type="email" id="checkoutEmail" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkoutPhone">Phone *</label>
+                            <input type="tel" id="checkoutPhone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkoutAddress">Address *</label>
+                            <textarea id="checkoutAddress" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkoutCity">City *</label>
+                            <input type="text" id="checkoutCity" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkoutPincode">Pincode *</label>
+                            <input type="text" id="checkoutPincode" required>
+                        </div>
+
+                        <h3 style="margin-top: 2rem; margin-bottom: 1.5rem;">Payment Method</h3>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="radio" name="paymentMethod" value="cash" checked> Cash on Delivery
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="radio" name="paymentMethod" value="card"> Credit/Debit Card
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="radio" name="paymentMethod" value="upi"> UPI
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">
+                            Place Order
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Order Summary -->
+                <div>
+                    <h3 style="margin-bottom: 1.5rem;">Order Summary</h3>
+                    <div id="orderSummary">
+                        <!-- Order summary will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Sahib Jewellers</h3>
+                    <p>Your trusted destination for premium jewelry since 1985. We offer exquisite designs in gold, diamond, and precious stones.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +91 1234567890</li>
+                        <li><i class="fas fa-envelope"></i> info@sahibjewellers.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Jewelry Street, Mumbai, India</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Sahib Jewellers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/validation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = getCart();
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            displayOrderSummary();
+        });
+
+        function displayOrderSummary() {
+            const cart = getCart();
+            const total = getCartTotal();
+            const summaryContainer = document.getElementById('orderSummary');
+
+            summaryContainer.innerHTML = `
+                <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                    ${cart.map(item => `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gray-dark);">
+                            <div>
+                                <strong>${item.name}</strong>
+                                <p style="font-size: 0.9rem; color: var(--gray-dark);">Qty: ${item.quantity}</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <strong>${formatCurrency(item.price * item.quantity)}</strong>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; margin-top: 1rem;">
+                        <span>Total:</span>
+                        <span style="color: var(--gold);">${formatCurrency(total)}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleCheckout(event) {
+            event.preventDefault();
+            
+            if (!validateCheckoutForm()) {
+                return;
+            }
+
+            const cart = getCart();
+            if (cart.length === 0) {
+                showAlert('Your cart is empty', 'error');
+                return;
+            }
+
+            const orderData = {
+                id: Date.now(),
+                customerName: document.getElementById('checkoutName').value,
+                customerEmail: document.getElementById('checkoutEmail').value,
+                customerPhone: document.getElementById('checkoutPhone').value,
+                address: document.getElementById('checkoutAddress').value,
+                city: document.getElementById('checkoutCity').value,
+                pincode: document.getElementById('checkoutPincode').value,
+                paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,
+                items: cart,
+                total: getCartTotal(),
+                status: 'Pending',
+                date: new Date().toISOString()
+            };
+
+            // Save order
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(orderData);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // Clear cart
+            clearCart();
+
+            // Show confirmation
+            alert(`Order placed successfully! Order ID: #${orderData.id}\n\nThank you for your purchase!`);
+            
+            // Redirect to home
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
+
+
